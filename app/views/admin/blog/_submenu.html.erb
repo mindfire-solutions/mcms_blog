@@ -1,0 +1,116 @@
+<!--
+  @Name: admin/blog/_submenu.html.erb
+  @Use:  This is a page for displaying menu parts in admin side
+  @Created date: 13-06-2012
+  @Modified Date: 13-07-2012
+  @Company:  Mindfire Solutions
+-->
+<%= javascript_include_tag  'jquery','admin/blog/mcms-blog-submenu.js' %>
+<div id="your-repos" class="repos">
+    <div class="top-bar">
+      <h2>Submenu Lists </h2>
+      <%= link_to t('.posts.new'),  new_admin_blog_post_url, :class =>"button new-repo" %>
+    </div>
+   
+    <ul class="repo-list" id="repo-listing">
+      <li class="submenu">
+          <%= link_to t('.posts.title'), 'javascript:void(0);', :class=>"parent-menu-link owner" %>
+          <span class="arrow"></span>
+          <ul id="repo-listing-child">
+            <li class="child-menu">
+              <%= link_to t('.posts.manage'), admin_blog_posts_path, :class=>"owner"%>
+            
+            </li>
+
+            <li class="child-menu">
+                <%= link_to t('.posts.uncategorized'), uncategorized_admin_blog_posts_url, :class=>"owner" %>
+                    
+            </li>
+
+            <li class="child-menu">
+                <%= link_to t('.posts.new'), new_admin_blog_post_url, :class=> 'owner' %>          
+                  
+            </li>
+          </ul>
+      </li>
+
+      
+
+      <li class="submenu">
+          <%= link_to t('.categories.title'), 'javascript:void(0);', :class => 'parent-menu-link folder-icon' %>
+          <span class="arrow"></span>
+          <ul>
+            <li class="child-menu">
+              <%= link_to t('.categories.manage'), admin_blog_categories_url, :class => 'folder-edit-icon' %>
+            
+            </li>
+
+            <li class="child-menu">
+                <%= link_to t('.categories.new'), new_admin_blog_category_url, :class => 'folder-add-icon' %>
+                
+            </li>
+          </ul>
+          
+      </li>
+
+      
+
+      <% if BlogPost::CommentSetting.is_comments_allowed? %>
+
+        <li class='submenu'>
+
+          <%= link_to 'Comments', 'javascript:void(0);', :class => 'parent-menu-link comments-icon' %>
+          <span class="arrow"></span>
+          <ul>
+            <li class='child-menu' >
+              <%= link_to t('.comments.new'), admin_blog_comments_path %>
+            
+            </li>
+
+            <li class='child-menu' >
+              <%= link_to t('.comments.approved'), approved_admin_blog_comments_path %>
+              
+            </li>
+
+            <li class='child-menu' >
+              <%= link_to t('.comments.rejected'), rejected_admin_blog_comments_path %>
+              
+            </li>
+          </ul>
+        </li>
+
+        
+
+      <% end %>
+
+      <li class="submenu">
+          <%= link_to t('.settings.title'), 'javascript:void(0);', :class => 'parent-menu-link settings-icon' %>
+          <span class="arrow"></span>
+          <ul>
+            <li class="child-menu">
+             <% @link_name =  BlogPost::CommentSetting.is_comments_allowed? ? 'Comments allowed' : 'Comments not allowed' %>
+                <%= link_to @link_name, comments_admin_blog_settings_url, :class => "#{BlogPost::CommentSetting.is_comments_allowed? ? 'success' : 'failure'}-icon" %>
+                
+            </li>
+
+            <li class="child-menu">
+              <% @link_name =  BlogPost::CommentSetting.is_comments_moderated? ? 'Moderation allowed' : 'Moderation not allowed' %>
+                <%= link_to @link_name, moderation_admin_blog_settings_url, :class => "#{BlogPost::CommentSetting.is_comments_moderated? ? 'success' : 'failure'}-icon" %>
+                
+            </li>
+
+            <li class="child-menu">
+                <%= link_to t('.settings.update_notified'),
+                      notification_recipients_admin_blog_settings_url,
+                      :class => 'user-comment-icon' %>
+              
+            </li>
+          </ul>
+
+      </li>
+
+    </ul>
+    <div class="bottom-bar">
+    </div>
+  </div>
+

@@ -1,0 +1,44 @@
+<!--
+  @Name: views/shared/admin/_form_actions.html.erb
+  @Use:  This is a partial for common submit button
+  @Created date: 08-06-2012
+  @Modified Date: 17-07-2012
+  @Company:  Mindfire Solutions
+-->
+<%
+    submit_button_text  ||= t('.save')
+    submit_button_id    ||= "submit_button"
+    submit_button_title ||= nil
+    cancel_button_text  ||= t('.cancel')
+    cancel_title = t('.cancel_lose_changes')
+    cancel_button_id    ||= "cancel_button"
+    unless f.nil?
+      if f.options[:html][:class] == 'edit_blog_post'
+        cancel_url          ||= admin_blog_posts_path
+      elsif f.options[:html][:class] == 'edit_blog_category'
+        cancel_url          ||= admin_blog_categories_path
+      else
+        cancel_url          ||= f.options[:url]
+      end
+    else
+      cancel_url          ||= admin_blog_settings_path
+    end
+%>
+<div class='form-actions'>
+  <div class='form-actions-left'>
+    <%= submit_tag submit_button_text,
+                   :id => submit_button_id,
+                   :name => nil,
+                   :class => "wymupdate button",
+                   :tooltip => submit_button_title  %>
+
+    
+    
+
+    <%= link_to(cancel_button_text, cancel_url,
+                :title => cancel_title,
+                :id => cancel_button_id,
+                :class => "close_dialog button")  %>
+  </div>
+  
+</div>

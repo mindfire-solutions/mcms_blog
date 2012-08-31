@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<head>
+  <%= render 'layouts/stylesheets' %>
+  
+  <%= render :partial => 'layouts/javascript' %>
+</head>
+  
+  <%= render :partial => "/shared/head" %>
+
+  <body>
+    <% page = arrange_page_part(Page.find_by_title('home'))
+      @menu_pages = Page.where(:published => true)
+    %>
+    <%= render :partial => 'mcms_pages/layouts/header', :locals => {:p => page["header"]} %>
+
+    <!-- render menu page -->
+    <%= render :partial => 'mcms_pages/pages/menu' %>
+    
+    <%#= render :partial => "/shared/ie6check" if request.env['HTTP_USER_AGENT'] =~ /MSIE/ -%>
+    <div id="container">
+      <div id="container-inner" class="pkg">
+        <div id="pagebody">
+          <div id="pagebody-inner" class="pkg">
+              <div id="beta">
+                <div id="beta-inner" class="pkg">
+                  <%= yield %>
+                </div>
+              </div>
+              <div id="gamma">
+                <div id="gamma-inner" class="pkg">
+                  <%= render :partial => "/blog/shared/categories" %>
+                  <%= render :partial => "/blog/shared/tags" %>
+                  <%= render :partial => "/blog/shared/rss_feed" %>
+                  <%= blog_archive_list %>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+        <footer>
+          <%= render :partial => "/shared/footer" -%>
+          <%= render :partial => 'mcms_pages/layouts/footer', :locals => {:p => page["footer"]} %>
+        </footer>
+      </div>
+    </div>
+  </body>
+</html>

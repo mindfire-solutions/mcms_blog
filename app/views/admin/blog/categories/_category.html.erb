@@ -1,0 +1,30 @@
+<!--
+  @Name: admin/blog/categories/_category.html.erb
+  @Use:  This is a partial for showing post records
+  @Created date: 08-06-2012
+  @Modified Date: 13-07-2012
+  @Company:  Mindfire Solutions
+-->
+
+<div class="alert issues-comment">
+  <div class="body">
+    <span class="mini-icon mini-icon-issue-comment"></span>
+      <span class='title'>
+        <%= category.title %>
+        <span class="preview">&nbsp;</span>
+      </span>
+
+      <span class='actions'>
+        <%= link_to image_tag("icons/application_edit.png"), edit_admin_blog_category_path(category),
+             :title => 'Edit' %>
+        <%= link_to image_tag("icons/delete.png"), admin_blog_category_path(category),
+            :class => "cancel confirm-delete",
+            :title => 'Delete',
+            :method => :delete,
+            :confirm => "Are you sure to delete ?" %>
+        <%= link_to image_tag("icons/application_go.png"), blog_category_path(category),
+            :title => 'Show',  :target => "_blank" %>
+      </span>
+
+  </div>
+</div>
